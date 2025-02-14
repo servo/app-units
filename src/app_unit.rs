@@ -2,6 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+#[cfg(feature = "malloc_size_of")]
+use malloc_size_of::malloc_size_of_is_0;
 #[cfg(feature = "num_traits")]
 use num_traits::Zero;
 #[cfg(feature = "serde_serialization")]
@@ -39,6 +41,9 @@ impl fmt::Debug for Au {
         write!(f, "{}px", self.to_f64_px())
     }
 }
+
+#[cfg(feature = "malloc_size_of")]
+malloc_size_of_is_0!(Au);
 
 #[cfg(feature = "serde_serialization")]
 impl<'de> Deserialize<'de> for Au {
